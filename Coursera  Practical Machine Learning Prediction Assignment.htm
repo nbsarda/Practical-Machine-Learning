@@ -167,7 +167,7 @@ img {
 </ul>
 </div>
 
-<pre><code>## Run time: 2016-02-26 15:02:40
+<pre><code>## Run time: 2016-03-10 10:37:06
 ## R version: R version 3.2.3 (2015-12-10)</code></pre>
 <p>Assignment: The goal of this project is to predict the manner in 
 which they did the exercise. This is the “classe” variable in the 
@@ -235,16 +235,16 @@ We do have however a reduced number of rows.</p>
 ## Resampling results across tuning parameters:
 ## 
 ##   cp          Accuracy   Kappa       Accuracy SD  Kappa SD  
-##   0.02739239  0.6173791  0.51594784  0.04073086   0.05125883
-##   0.03498162  0.5463628  0.41794748  0.07066575   0.10599473
-##   0.11028104  0.3155291  0.04693962  0.03683527   0.05875816
+##   0.03948773  0.5720107  0.45190429  0.03925126   0.05459532
+##   0.04423100  0.5620400  0.43751003  0.03919020   0.05496794
+##   0.10921380  0.3240386  0.05922407  0.04008987   0.05829062
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was cp = 0.02739239.</code></pre>
+## The final value used for the model was cp = 0.03948773.</code></pre>
 <pre class="r"><code class="r"><span class="identifier">results</span> <span class="operator">&lt;-</span> <span class="identifier">modFit</span><span class="operator">$</span><span class="identifier">results</span>
 <span class="identifier">round</span><span class="paren">(</span><span class="identifier">max</span><span class="paren">(</span><span class="identifier">results</span><span class="operator">$</span><span class="identifier">Accuracy</span><span class="paren">)</span>,<span class="number">4</span><span class="paren">)</span><span class="operator">*</span><span class="number">100</span></code></pre>
-<pre><code>## [1] 61.74</code></pre>
-<p>Note that running the train() function can take some time! The accuracy of the model is low: 61.74 %</p>
+<pre><code>## [1] 57.2</code></pre>
+<p>Note that running the train() function can take some time! The accuracy of the model is low: 57.2 %</p>
 <p>A second attempt to create a model is done by using Random forests:</p>
 <pre class="r"><code class="r"><span class="identifier">ctrl</span><span class="operator">&lt;-</span> <span class="identifier">trainControl</span><span class="paren">(</span><span class="identifier">method</span> <span class="operator">=</span> <span class="string">"cv"</span>, <span class="identifier">number</span> <span class="operator">=</span><span class="number">4</span>, <span class="identifier">allowParallel</span> <span class="operator">=</span> <span class="literal">TRUE</span><span class="paren">)</span>
 <span class="identifier">modFit</span> <span class="operator">&lt;-</span> <span class="identifier">train</span><span class="paren">(</span><span class="identifier">pml.sub.training</span><span class="operator">$</span><span class="identifier">classe</span> <span class="operator">~</span>.,<span class="identifier">data</span> <span class="operator">=</span> <span class="identifier">pml.sub.training</span>,<span class="identifier">method</span><span class="operator">=</span><span class="string">"rf"</span>,<span class="identifier">prof</span><span class="operator">=</span><span class="literal">TRUE</span>, <span class="identifier">trControl</span> <span class="operator">=</span> <span class="identifier">ctrl</span><span class="paren">)</span></code></pre>
@@ -265,20 +265,20 @@ We do have however a reduced number of rows.</p>
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (4 fold) 
-## Summary of sample sizes: 2945, 2946, 2945, 2945 
+## Summary of sample sizes: 2945, 2945, 2945, 2946 
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy   Kappa      Accuracy SD  Kappa SD   
-##    2    0.9717343  0.9642249  0.003038498  0.003858762
-##   28    0.9872688  0.9838916  0.003940759  0.004984397
-##   55    0.9880333  0.9848587  0.004579890  0.005796440
+##    2    0.9714818  0.9639116  0.008753130  0.011081714
+##   28    0.9875229  0.9842142  0.003657691  0.004627672
+##   55    0.9849768  0.9809927  0.005080300  0.006427634
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was mtry = 55.</code></pre>
+## The final value used for the model was mtry = 28.</code></pre>
 <pre class="r"><code class="r"><span class="identifier">results</span> <span class="operator">&lt;-</span> <span class="identifier">modFit</span><span class="operator">$</span><span class="identifier">results</span>
 <span class="identifier">round</span><span class="paren">(</span><span class="identifier">max</span><span class="paren">(</span><span class="identifier">results</span><span class="operator">$</span><span class="identifier">Accuracy</span><span class="paren">)</span>,<span class="number">4</span><span class="paren">)</span><span class="operator">*</span><span class="number">100</span></code></pre>
-<pre><code>## [1] 98.8</code></pre>
-<p>This second attempt provides us with a model that has a much higher accuracy: : 98.8 %</p>
+<pre><code>## [1] 98.75</code></pre>
+<p>This second attempt provides us with a model that has a much higher accuracy: : 98.75 %</p>
 </div>
 <div id="cross-validation" class="section level2">
 <h2>Cross-validation</h2>
@@ -289,16 +289,16 @@ We do have however a reduced number of rows.</p>
 <pre><code>##     
 ## pred    A    B    C    D    E
 ##    A 4463   12    0    0    0
-##    B    1 3008   19    0    0
-##    C    0   16 2705   30    0
-##    D    0    0   13 2537    4
-##    E    0    1    0    5 2881</code></pre>
+##    B    1 3008   22    0    5
+##    C    0   17 2706   18    0
+##    D    0    0    9 2546   43
+##    E    0    0    0    8 2837</code></pre>
 <p>As expected the predictions are not correct in all cases. We can calculate the accuracy of the prediction:</p>
 <pre class="r"><code class="r"><span class="identifier">pRes</span> <span class="operator">&lt;-</span> <span class="identifier">postResample</span><span class="paren">(</span><span class="identifier">pred</span>, <span class="identifier">pml.test.training</span><span class="operator">$</span><span class="identifier">classe</span><span class="paren">)</span>
 <span class="identifier">pRes</span></code></pre>
 <pre><code>##  Accuracy     Kappa 
-## 0.9935648 0.9918597</code></pre>
-<p>The prediction fitted the test set even slightly better than the training set: 99.3565 %</p>
+## 0.9913985 0.9891200</code></pre>
+<p>The prediction fitted the test set even slightly better than the training set: 99.1399 %</p>
 <div id="expected-out-of-sample-error" class="section level3">
 <h3>Expected out of sample error</h3>
 <p>We can calculate the expected out of sample error based on the test set that we created for cross-validation:</p>
@@ -309,33 +309,33 @@ We do have however a reduced number of rows.</p>
 ##           Reference
 ## Prediction    A    B    C    D    E
 ##          A 4463   12    0    0    0
-##          B    1 3008   19    0    0
-##          C    0   16 2705   30    0
-##          D    0    0   13 2537    4
-##          E    0    1    0    5 2881
+##          B    1 3008   22    0    5
+##          C    0   17 2706   18    0
+##          D    0    0    9 2546   43
+##          E    0    0    0    8 2837
 ## 
 ## Overall Statistics
 ##                                           
-##                Accuracy : 0.9936          
-##                  95% CI : (0.9922, 0.9948)
+##                Accuracy : 0.9914          
+##                  95% CI : (0.9898, 0.9928)
 ##     No Information Rate : 0.2844          
 ##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
 ##                                           
-##                   Kappa : 0.9919          
+##                   Kappa : 0.9891          
 ##  Mcnemar's Test P-Value : NA              
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity            0.9998   0.9905   0.9883   0.9864   0.9986
-## Specificity            0.9989   0.9984   0.9965   0.9987   0.9995
-## Pos Pred Value         0.9973   0.9934   0.9833   0.9933   0.9979
-## Neg Pred Value         0.9999   0.9977   0.9975   0.9973   0.9997
+## Sensitivity            0.9998   0.9905   0.9887   0.9899   0.9834
+## Specificity            0.9989   0.9978   0.9973   0.9960   0.9994
+## Pos Pred Value         0.9973   0.9908   0.9872   0.9800   0.9972
+## Neg Pred Value         0.9999   0.9977   0.9976   0.9980   0.9963
 ## Prevalence             0.2844   0.1935   0.1744   0.1639   0.1838
-## Detection Rate         0.2844   0.1917   0.1723   0.1616   0.1836
-## Detection Prevalence   0.2851   0.1929   0.1753   0.1627   0.1839
-## Balanced Accuracy      0.9994   0.9944   0.9924   0.9925   0.9991</code></pre>
-<p>The expected out of sample error is: 0.6435 %</p>
+## Detection Rate         0.2844   0.1917   0.1724   0.1622   0.1808
+## Detection Prevalence   0.2851   0.1934   0.1746   0.1655   0.1813
+## Balanced Accuracy      0.9994   0.9941   0.9930   0.9930   0.9914</code></pre>
+<p>The expected out of sample error is: 0.8601 %</p>
 <p>Note: The confusionMatrix function from the Caret package does 
 provide all the information that we calculated ‘by hand’ in the first 
 part of the Cross-validation. It shows that both methods provide the 
